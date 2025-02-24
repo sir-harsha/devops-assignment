@@ -1,0 +1,66 @@
+Started by user User 404
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/sample
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . python:3.7
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins does not seem to be running inside a container
+$ docker run -t -d -u 995:993 -w /var/lib/jenkins/workspace/sample -v /var/lib/jenkins/workspace/sample:/var/lib/jenkins/workspace/sample:rw,z -v /var/lib/jenkins/workspace/sample@tmp:/var/lib/jenkins/workspace/sample@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** python:3.7 cat
+$ docker top ee5ec5d85ef5c7e9964f549bdfc0558e906498ddfc186a43bc17076e6bb0e91e -eo pid,comm
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+Warning: JENKINS-30600: special launcher org.jenkinsci.plugins.docker.workflow.WithContainerStep$Decorator$1@73269dbd; decorates hudson.Launcher$LocalLauncher@7de16da9 will be ignored (a typical symptom is the Git executable not being run inside a designated container)
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/sample/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/sir-harsha/devops-assignment.git # timeout=10
+Fetching upstream changes from https://github.com/sir-harsha/devops-assignment.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.40.1'
+ > git fetch --tags --force --progress -- https://github.com/sir-harsha/devops-assignment.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision aebea84ae27d16d3eab0babbbe0a20527d0d5d12 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f aebea84ae27d16d3eab0babbbe0a20527d0d5d12 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b main aebea84ae27d16d3eab0babbbe0a20527d0d5d12 # timeout=10
+Commit message: "Delete requirements.txt"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ python pythonfirst10.py
+First 10 numbers are:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+$ docker stop --time=1 ee5ec5d85ef5c7e9964f549bdfc0558e906498ddfc186a43bc17076e6bb0e91e
+$ docker rm -f --volumes ee5ec5d85ef5c7e9964f549bdfc0558e906498ddfc186a43bc17076e6bb0e91e
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
